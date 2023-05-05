@@ -40,7 +40,7 @@ module.exports = function (passport) {
     passport.serializeUser((user, done) => {
         done(null, user.id);
     });
-    //!Change: findById() is depricated, so code from original tutorial will not work
+    //!Change: In the current version of Passport (Passport.js v0.4.1), the recommended approach for serializing and deserializing users is to use passport.serializeUser with an async function and passport.deserializeUser with an async function or a Promise-based approach.
     passport.deserializeUser(async (id, done) => {
         try {
             const user = await User.findById(id).exec();
@@ -49,6 +49,5 @@ module.exports = function (passport) {
             done(err);
         }
     });
-
 }
 
