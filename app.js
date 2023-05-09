@@ -11,6 +11,12 @@ const session = require('express-session')
 //!Change: MongoStore does not require (session) 
 const MongoStore = require('connect-mongo')//(session)
 const connectDB = require('./config/db')
+const guestRoute = require('./routes/guest');
+const User = require('./models/User');
+
+const username = 'Guest_' + Math.floor(Math.random() * 1000000); // Generate a random username for the guest user
+const newGuestUser = new User({ username }); // Create a new guest user with the generated username
+newGuestUser.save(); // Save the new guest user to the database
 
 
 //Load config
@@ -95,13 +101,32 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
 app.use('/stories', require('./routes/stories'))
+app.use('/guest', guestRoute);
 
 
-const PORT = process.env.PORT || 8500
+
+// Create new guest user if user is not authenticated
+guestRoute.use(async (req, res, next) => {
+    if (!req.user) {
+        try {
+            const username = 'Guest_' + Math.floor(Math.random() * 1000000);
+            const newGuestUser = new User({ username });
+            await newGuestUser.save()
+            req.user = newGuestUser;
+            next();
+        } catch (err) {
+            next(err);
+        }
+    } else {
+        next();
+    }
+});
+
+app.use('/guest', guestRoute);
+
+const PORT = process.env.PORT || 3000
 
 app.listen(
     PORT,
     console.log(`Server running in ${process.env.NODE_ENV} node on port ${PORT}`)
 )
-
-

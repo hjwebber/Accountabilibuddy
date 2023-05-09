@@ -1,3 +1,4 @@
+
 module.exports = {
     ensureAuth: function (req, res, next) {
         if (req.isAuthenticated()) {
@@ -14,3 +15,7 @@ module.exports = {
         }
     },
 }
+
+
+
+
