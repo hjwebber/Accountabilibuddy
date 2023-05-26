@@ -1,6 +1,6 @@
 # Accountabilibuddy (Work in Progress)
 
-Accountabilibuddy is a full stack web application designed to help users stay accountable to their goals by providing a platform for tracking progress, setting reminders, and connecting with accountability partners. Whether you're striving to achieve personal, fitness, chores with roommates, or professional goals, Accountabilibuddy has got you covered.
+Accountabilibuddy is a full stack web application designed to help users stay accountable to their goals by providing a platform for tracking progress, setting reminders, and connecting with accountability partners. Whether you're striving to achieve personal, fitness, or professional goals, or even track your chores with your roommates, Accountabilibuddy has got you covered.
 
 **Please note that this project is currently a work in progress. It is being actively developed and improved.**
 
